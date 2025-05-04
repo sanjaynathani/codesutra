@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "sourceMap": true,
     "jsx": "preserve",
     "baseUrl": ".",
     "incremental": true,
@@ -22,7 +25,7 @@
     ],
     "strictNullChecks": true,
     "paths": {
-      "@payload-config": ["./payload.config.ts"],
+      "@payload-config": ["./src/payload.config.ts"],
       "react": [
         "./node_modules/@types/react"
       ],
@@ -31,6 +34,11 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "redirects.js",
+    "next.config.js",
+    "next-sitemap.config.cjs"],
   "exclude": ["node_modules"]
 }

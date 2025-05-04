@@ -3,7 +3,7 @@
 // This means that we need to populate the authors manually here to protect user privacy
 // GraphQL will not return mutated user data that differs from the underlying schema
 // So we use an alternative `populatedAuthors` field to populate the user data, hidden from the admin UI
-import {User} from "../../../../payload-types";
+import {User} from "../../../payload-types";
 import {CollectionAfterReadHook} from "payload";
 
 export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: { payload } }) => {

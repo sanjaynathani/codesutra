@@ -1,6 +1,5 @@
 
 import type { NextConfig } from "next";
-// @ts-ignore
 import withPayload from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {

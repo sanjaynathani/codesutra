@@ -1,5 +1,6 @@
 import React from 'react'
 
+// @ts-ignore
 import type { CallToActionBlock as CTABlockProps } from '@/payload-types'
 
 import RichText from '@/components/RichText'

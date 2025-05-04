@@ -2,7 +2,6 @@ import { getPayload } from "payload";
 import configPromise from '@payload-config'
 import React, {cache} from "react";
 import {draftMode} from "next/headers";
-import {PayloadRedirects} from "@/components/PayloadRedirects";
 import RichText from "@/components/RichText";
 
 export const metadata = {
@@ -33,8 +32,15 @@ const queryAbout = cache(async ({ slug }: { slug: string }) => {
 
 export default async function About() {
   const slug = 'codesutra-'
-  const url = '/content' + slug
   const post = await queryAbout({ slug })
+
+  if (!post) {
+    return (
+        <section>
+          <h1 className="mb-8 text-2xl font-medium">Content not found</h1>
+        </section>
+    )
+  }
 
   return (
       <section>

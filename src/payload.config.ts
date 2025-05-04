@@ -3,13 +3,14 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import path from "path";
-import {Users} from "./src/collections/Users";
+import {Users} from "@/collections/Users";
 import {fileURLToPath} from "url";
 import {vercelBlobStorage} from "@payloadcms/storage-vercel-blob";
-import {Media} from "./src/collections/Media";
-import {Posts} from "./src/collections/Posts";
-import {Categories} from "./src/collections/Categories";
+import {Media} from "@/collections/Media";
+import {Posts} from "@/collections/Posts";
+import {Categories} from "@/collections/Categories";
 import { Contents } from '@/collections/Content';
+import {getServerSideURL} from "@/utilities/getURL";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,6 +27,7 @@ export default buildConfig({
 
     // Define and configure your collections in this array
     collections: [Users, Media, Posts, Contents, Categories],
+    cors: [getServerSideURL()].filter(Boolean),
 
     // Your Payload secret - should be a complex and secure string, unguessable
     secret: process.env.PAYLOAD_SECRET || '',
