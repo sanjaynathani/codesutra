@@ -14,6 +14,8 @@ export default async function BlogPosts() {
         collection: 'posts',
         depth: 1,
         limit: 12,
+        where: {}, // Add an empty where clause if you don't need filtering
+        sort: '-createdAt', // Optional: sort by creation date descending
         overrideAccess: false,
         select: {
             title: true,
@@ -48,13 +50,11 @@ export default async function BlogPosts() {
       <div>
         {postsWithAuthors
             .sort((a, b) => {
-            if (
-              new Date(a.publishedAt) >
-              new Date(b.publishedAt)
-            ) {
-              return -1;
-            }
-            return 1;
+                // Add null checks and provide default dates if needed
+                const dateA = a.publishedAt ? new Date(a.publishedAt) : new Date(0);
+                const dateB = b.publishedAt ? new Date(b.publishedAt) : new Date(0);
+
+                return dateB.getTime() - dateA.getTime(); // For descending order (newest first)
           })
           .map((post) => (
 
@@ -69,7 +69,9 @@ export default async function BlogPosts() {
                     </h2>
                     <div className="flex justify-start items-center text-sm">
                         <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
-                            {formatDate(post.publishedAt, true)}
+                            {
+                                post.publishedAt ? formatDate(post.publishedAt, true) : ''
+                            }
                         </p>
                         <p className="mr-4 ml-4">•</p>
                         <p className="text-neutral-600 dark:text-neutral-400">
