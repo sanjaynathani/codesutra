@@ -36,6 +36,14 @@ export default async function About() {
     const slug = 'sanjay-nathani'
     const post = await queryAbout({ slug })
 
+    if (!post) {
+        return (
+            <section>
+                <h1 className="mb-8 text-2xl font-medium">Content not found</h1>
+            </section>
+        )
+    }
+
     return (
         <section>
             <a href="/" target="_blank">

@@ -2,10 +2,7 @@
 
 import React from "react";
 import {
-  FaXTwitter,
   FaGithub,
-  FaInstagram,
-  FaRss,
   FaLinkedinIn,
 } from "react-icons/fa6";
 import { TbMailFilled } from "react-icons/tb";
@@ -13,7 +10,7 @@ import {metaData, socialLinks} from "../config";
 
 const YEAR = new Date().getFullYear();
 
-function SocialLink({ href, icon: Icon }) {
+function SocialLink({ href, icon: Icon }: { href: string; icon: React.ElementType }) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer">
       <Icon />

@@ -10,7 +10,7 @@ import { CMSLink } from '@/components/Link'
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const { columns } = props
 
-  const colsSpanClasses = {
+  const colsSpanClasses: Record<'full' | 'half' | 'oneThird' | 'twoThirds', string> = {
     full: '12',
     half: '6',
     oneThird: '4',
@@ -22,7 +22,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&
           columns.length > 0 &&
-          columns.map((col, index) => {
+          columns.map((col: { enableLink: boolean; link: any; richText: any; size: 'full' | 'half' | 'oneThird' | 'twoThirds' }, index: React.Key | null | undefined) => {
             const { enableLink, link, richText, size } = col
 
             return (
