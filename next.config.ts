@@ -1,5 +1,6 @@
 
 import type { NextConfig } from "next";
+// @ts-ignore
 import withPayload from "@payloadcms/next/withPayload";
 
 const nextConfig: NextConfig = {
@@ -38,4 +39,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(nextConfig);
+export default withPayload(nextConfig, { devBundleServerPackages: false });
