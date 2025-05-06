@@ -1,34 +1,53 @@
-import Link from "next/link";
-import type { Metadata } from "next";
-import { projects } from "./project-data";
+import { getPayload } from "payload";
+import configPromise from '@payload-config'
+import React, {cache} from "react";
+import {draftMode} from "next/headers";
+import RichText from "@/components/RichText";
+import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Projects",
-  description: "Nextfolio Projects",
+export const revalidate = 0;
+
+export const metadata = {
+    title: "Work",
+    description: "Overview of my work.",
 };
 
-export default function Projects() {
-  return (
-    <section>
-      <h1 className="mb-8 text-2xl font-medium">Projects</h1>
-      <div>
-        {projects.map((project, index) => (
-          <Link
-            key={index}
-            href={project.url}
-            className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2">
-              <h2 className="text-black dark:text-white">{project.title}</h2>
-              <p className="text-neutral-600 dark:text-neutral-400">
-                {project.description}
-              </p>
+const queryAbout = cache(async ({ slug }: { slug: string }) => {
+    const { isEnabled: draft } = await draftMode()
+    const payload = await getPayload({ config: configPromise })
+    const result = await payload.find({
+        collection: 'contents',
+        draft,
+        limit: 1,
+        overrideAccess: draft,
+        pagination: false,
+        where: {
+            slug: {
+                equals: slug,
+            },
+        },
+    })
+    return result.docs?.[0] || null
+})
+
+export default async function About() {
+    const slug = 'my-work'
+    const content = await queryAbout({ slug })
+
+    if (!content) {
+        return (
+            <section className="max-w-4xl mx-auto px-4 py-12">
+                <h1 className="mb-8 text-2xl font-medium">Content not found</h1>
+            </section>
+        )
+    }
+
+    return (
+        <section>
+            <div className="flex justify-start items-start">
+                <h1 className="mb-8 text-2xl font-medium">{content.title}</h1>
             </div>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
+            <RichText className="leading-relaxed" data={content.text} enableGutter={false}/>
+        </section>
+    )
 }

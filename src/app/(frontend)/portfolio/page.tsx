@@ -8,15 +8,13 @@ import Image from "next/image";
 export const revalidate = 0;
 
 export const metadata = {
-    title: "About",
+    title: "Portfolio",
     description: "What's Code Sutra?",
 };
 
 const queryAbout = cache(async ({ slug }: { slug: string }) => {
     const { isEnabled: draft } = await draftMode()
-
     const payload = await getPayload({ config: configPromise })
-
     const result = await payload.find({
         collection: 'contents',
         draft,
@@ -29,41 +27,62 @@ const queryAbout = cache(async ({ slug }: { slug: string }) => {
             },
         },
     })
-
     return result.docs?.[0] || null
 })
 
 export default async function About() {
     const slug = 'sanjay-nathani'
-    const post = await queryAbout({ slug })
+    const content = await queryAbout({ slug })
 
-    if (!post) {
+    if (!content) {
         return (
-            <section>
+            <section className="max-w-4xl mx-auto px-4 py-12">
                 <h1 className="mb-8 text-2xl font-medium">Content not found</h1>
             </section>
         )
     }
 
+    // Assuming your image field in Payload CMS is named 'profileImage'
+    type Media = {
+        url: string;
+        alt?: string;
+    };
+
+    const profileImage = content.image as Media;
+
     return (
-        <section>
-            <a href="/" target="_blank">
-                <Image
-                    src="/profile.png"
-                    alt="Profile photo"
-                    className="rounded-full bg-gray-100 block lg:mt-5 mt-0 lg:mb-5 mb-10 mx-auto sm:float-right sm:ml-5 sm:mb-5 grayscale hover:grayscale-0"
-                    unoptimized
-                    width={160}
-                    height={160}
-                    priority
-                />
-            </a>
-            <h1 className="mb-8 text-2xl font-medium">
-                {post.title}
-            </h1>
-            <article className="prose prose-quoteless prose-neutral dark:prose-invert">
-                <RichText className="max-w-[48rem] mx-auto" data={post.text} enableGutter={false} />
-            </article>
+        <section className="max-w-4xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                {/* Profile Image Column */}
+                <div className="md:col-span-4 lg:col-span-3">
+                    <div className="sticky top-8">
+                        {profileImage && (
+                            <Image
+                                src={profileImage.url}
+                                alt={profileImage.alt || "Profile photo"}
+                                className="rounded-full bg-gray-100 w-48 h-48 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300"
+                                width={192}
+                                height={192}
+                                priority
+                            />
+                        )}
+                    </div>
+                </div>
+
+                {/* Content Column */}
+                <div className="md:col-span-8 lg:col-span-9">
+                    <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+                        {content.title}
+                    </h1>
+                    <article className="prose prose-lg prose-quoteless prose-neutral dark:prose-invert max-w-none">
+                        <RichText
+                            data={content.text}
+                            enableGutter={false}
+                            className="leading-relaxed"
+                        />
+                    </article>
+                </div>
+            </div>
         </section>
     )
 }

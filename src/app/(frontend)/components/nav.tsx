@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { ThemeSwitch } from "./theme-switch";
-import {metaData, socialLinks} from "../config";
 import Image from "next/image";
+import { useState } from "react";
+import { Menu, X } from "lucide-react"; // You already have lucide-react in your dependencies
 
 const navItems = {
   "/portfolio": { name: "Portfolio" },
@@ -10,43 +13,63 @@ const navItems = {
 };
 
 export function Navbar() {
-  return (
-    <nav className="lg:mb-3 mb-1 py-0">
-      <div className="flex flex-col md:flex-row md:items-center justify-between">
-        <div className="flex items-center">
-          <a href="/">
-            <Image
-                src="/code-sutra_logo_light.png"
-                alt="Code Sutra"
-                className="block dark:hidden"
-                width={190}
-                height={100}
-                priority
-            />
-            <Image
-                src="/code-sutra_logo_dark.png"
-                alt="Code Sutra"
-                className="hidden dark:block"
-                width={190}
-                height={100}
-                priority
-            />
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-          </a>
-        </div>
-        <div className="flex flex-row gap-4 mt-3 md:mt-0 md:ml-auto items-center">
-          {Object.entries(navItems).map(([path, { name }]) => (
-            <Link
-              key={path}
-              href={path}
-              className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+  return (
+      <nav className="fixed top-0 left-10 right-10 z-50 bg-white dark:bg-black lg:mb-3 mb-1 py-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between">
+          <div className="flex items-center justify-between">
+            <a href="/">
+              <Image
+                  src="/code-sutra_logo_light.png"
+                  alt="Code Sutra"
+                  className="block dark:hidden"
+                  width={130}
+                  height={130}
+                  priority
+              />
+              <Image
+                  src="/code-sutra_logo_dark.png"
+                  alt="Code Sutra"
+                  className="hidden dark:block"
+                  width={130}
+                  height={130}
+                  priority
+              />
+            </a>
+            {/* Hamburger Menu Button */}
+            <button
+                className="md:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Toggle menu"
             >
-              {name}
-            </Link>
-          ))}
-          <ThemeSwitch />
+              {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+              ) : (
+                  <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+
+          {/* Navigation Items */}
+          <div
+              className={`${
+                  isMenuOpen ? 'flex' : 'hidden'
+              } md:flex flex-col md:flex-row gap-3 mt-2 md:mt-0 ml-5 md:ml-auto items-center`}
+          >
+            {Object.entries(navItems).map(([path, { name }]) => (
+                <Link
+                    key={path}
+                    href={path}
+                    className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative w-full md:w-auto text-center py-2 md:py-0"
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                  {name}
+                </Link>
+            ))}
+            <ThemeSwitch />
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
   );
 }

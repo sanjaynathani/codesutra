@@ -2,9 +2,9 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 
 import { revalidatePath, revalidateTag } from 'next/cache'
 
-import type { Post } from '@/payload-types'
+import type {Content, Post} from '@/payload-types'
 
-export const revalidateContent: CollectionAfterChangeHook<Post> = ({
+export const revalidateContent: CollectionAfterChangeHook<Content> = ({
   doc,
   previousDoc,
   req: { payload, context },

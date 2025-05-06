@@ -8,6 +8,7 @@ import React, { cache } from 'react'
 import RichText from '@/components/RichText'
 
 import { generateMeta } from '@/utilities/generateMeta'
+import ShareButtons from "@/components/ShareButtons/ShareButtons";
 
 export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise })
@@ -47,17 +48,13 @@ export default async function Post({ params: paramsPromise }: Args) {
         <article className="prose prose-quoteless prose-neutral dark:prose-invert">
             {/*<PostHero post={post} />*/}
             <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-            {/*<div className="flex flex-col items-center gap-4 pt-8">
-                <div className="container">
-                    <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-                    {post.relatedPosts && post.relatedPosts.length > 0 && (
-                        <RelatedPosts
-                            className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-                            docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-                        />
-                    )}
-                </div>
-            </div>*/}
+            {/* Add ShareButtons component */}
+            <div className="flex justify-end items-end mt-8">
+                <ShareButtons
+                    path={url}
+                    title={post.title || 'Check out this article'}
+                />
+            </div>
         </article>
     )
 }
