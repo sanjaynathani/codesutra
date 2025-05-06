@@ -16,9 +16,9 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-      <nav className="fixed top-0 left-10 right-10 z-50 bg-white dark:bg-black lg:mb-3 mb-1 py-2">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-black lg:mb-3 mb-1 py-2">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between ml-10">
             <a href="/">
               <Image
                   src="/code-sutra_logo_light.png"
@@ -55,7 +55,7 @@ export function Navbar() {
           <div
               className={`${
                   isMenuOpen ? 'flex' : 'hidden'
-              } md:flex flex-col md:flex-row gap-3 mt-2 md:mt-0 ml-5 md:ml-auto items-center`}
+              } md:flex flex-col md:flex-row gap-3 mt-2 md:mt-0 mr-10 md:mr-10 ml-5 md:ml-auto items-center`}
           >
             {Object.entries(navItems).map(([path, { name }]) => (
                 <Link
