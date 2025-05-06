@@ -6,9 +6,10 @@ import {
     LinkedinShareButton,
     FacebookIcon,
     TwitterIcon,
-    LinkedinIcon,
+    LinkedinIcon, XIcon, EmailShareButton, EmailIcon, RedditShareButton, RedditIcon,
 } from 'react-share';
 import {getServerSideURL} from "@/utilities/getURL";
+import {CopyButton} from "@/blocks/Code/CopyButton";
 
 interface ShareButtonsProps {
     path: string;
@@ -23,16 +24,25 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ path, title }) => {
     return (
         <div className="flex justify-end items-end gap-8">
             <FacebookShareButton url={url} title={title}>
-                <FacebookIcon size={32} round />
+                <FacebookIcon size={25} round={true}/>
             </FacebookShareButton>
 
             <TwitterShareButton url={url} title={title}>
-                <TwitterIcon size={32} round />
+                <XIcon size={25} round={true}/>
             </TwitterShareButton>
 
             <LinkedinShareButton url={url} title={title}>
-                <LinkedinIcon size={32} round />
+                <LinkedinIcon size={25} round={true}/>
             </LinkedinShareButton>
+
+            <RedditShareButton url={url} title={title}>
+                <RedditIcon size={25} round={true}/>
+            </RedditShareButton>
+
+            <EmailShareButton url={url} title={title}>
+                <EmailIcon size={25} round={true}/>
+            </EmailShareButton>
+
         </div>
     );
 };
