@@ -3,6 +3,8 @@ import { formatDate, getBlogPosts } from "src/app/(frontend)/lib/posts";
 import { getPayload } from "payload";
 import configPromise from '@payload-config'
 
+export const revalidate = 0;
+
 export const metadata = {
   title: "Blog",
   description: "Writings",
