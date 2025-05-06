@@ -2,9 +2,10 @@ import { getPayload } from "payload";
 import configPromise from '@payload-config'
 import React, {cache} from "react";
 import {draftMode} from "next/headers";
-import {PayloadRedirects} from "@/components/PayloadRedirects";
 import RichText from "@/components/RichText";
 import Image from "next/image";
+
+export const revalidate = 0;
 
 export const metadata = {
     title: "About",

@@ -4,7 +4,7 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 
 import type { Post } from '@/payload-types'
 
-export const revalidatePost: CollectionAfterChangeHook<Post> = ({
+export const revalidateContent: CollectionAfterChangeHook<Post> = ({
   doc,
   previousDoc,
   req: { payload, context },
