@@ -1,7 +1,7 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  return process.env.VERCEL_ENV === "production"
+  return process.env.VERCEL_TARGET_ENV === "production"
       ? `https://www.my-custom-domain.com`
       : process.env.VERCEL_URL
           ? `https://${process.env.VERCEL_URL}`
@@ -17,7 +17,7 @@ export const getClientSideURL = () => {
     return `${protocol}//${domain}${port ? `:${port}` : ''}`
   }
 
-  if (process.env.VERCEL_ENV === "production") {
+  if (process.env.VERCEL_TARGET_ENV === "production") {
     return `https://${process.env.VERCEL_URL}`
   }
 
