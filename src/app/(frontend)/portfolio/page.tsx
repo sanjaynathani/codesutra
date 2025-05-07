@@ -4,6 +4,7 @@ import React, {cache} from "react";
 import {draftMode} from "next/headers";
 import RichText from "@/components/RichText";
 import Image from "next/image";
+import {Media} from "@/payload-types"
 
 export const revalidate = 0;
 
@@ -42,12 +43,6 @@ export default async function About() {
         )
     }
 
-    // Assuming your image field in Payload CMS is named 'profileImage'
-    type Media = {
-        url: string;
-        alt?: string;
-    };
-
     const profileImage = content.image as Media;
 
     return (
@@ -58,13 +53,16 @@ export default async function About() {
                     <div className="sticky top-8">
                         {profileImage && (
                             <Image
-                                src={profileImage.url}
+                                src={profileImage?.url ?? ''}
                                 alt={profileImage.alt || "Profile photo"}
                                 className="rounded-full bg-gray-100 w-48 h-48 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300"
                                 width={192}
                                 height={192}
                                 priority
                             />
+                            /*<Media fill priority
+                                   imgClassName="rounded-full bg-gray-100 w-48 h-48 mx-auto shadow-lg hover:shadow-xl transition-shadow duration-300"
+                                   resource={profileImage} />*/
                         )}
                     </div>
                 </div>

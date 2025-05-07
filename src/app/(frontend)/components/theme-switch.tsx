@@ -102,7 +102,7 @@ export const ThemeSwitch: React.FC = () => {
       />
     </button>*/
       <button id="theme-toggle"
-              className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90"
+              className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90 mr-10"
               aria-label={`${currentTheme} mode`}
               onClick={toggleTheme}>
         {currentTheme === 'auto' && (getSystemTheme() === 'dark' ? '🌙' : '☀️')}

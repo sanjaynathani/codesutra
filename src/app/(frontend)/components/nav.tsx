@@ -24,22 +24,22 @@ export function Navbar() {
                   src="/code-sutra_logo_light.png"
                   alt="Code Sutra"
                   className="block dark:hidden"
-                  width={130}
-                  height={130}
+                  width={80}
+                  height={80}
                   priority
               />
               <Image
                   src="/code-sutra_logo_dark.png"
                   alt="Code Sutra"
                   className="hidden dark:block"
-                  width={130}
-                  height={130}
+                  width={80}
+                  height={80}
                   priority
               />
             </a>
             {/* Hamburger Menu Button */}
             <button
-                className="md:hidden"
+                className="md:hidden mr-10"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
             >
@@ -55,7 +55,7 @@ export function Navbar() {
           <div
               className={`${
                   isMenuOpen ? 'flex' : 'hidden'
-              } md:flex flex-col md:flex-row gap-3 mt-2 md:mt-0 mr-10 md:mr-10 ml-5 md:ml-auto items-center`}
+              } md:flex flex-col md:flex-row gap-3 mt-2 md:mt-0 ml-5 md:ml-auto items-center`}
           >
             {Object.entries(navItems).map(([path, { name }]) => (
                 <Link
