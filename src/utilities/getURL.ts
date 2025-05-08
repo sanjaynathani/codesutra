@@ -1,8 +1,8 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  return process.env.VERCEL_TARGET_ENV === "production" && process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
+  return process.env.VERCEL_TARGET_ENV === "production" && process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : `http://localhost:3000`;
 }
 
@@ -16,7 +16,7 @@ export const getClientSideURL = () => {
   }
 
   if (process.env.VERCEL_TARGET_ENV === "production") {
-    return `https://${process.env.VERCEL_URL}`
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
 
   return process.env.NEXT_PUBLIC_SERVER_URL || ''

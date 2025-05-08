@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.VERCEL_URL || 'localhost',
+        hostname: process.env.VERCEL_PROJECT_PRODUCTION_URL || 'localhost',
       },
       {
         protocol: 'http',
