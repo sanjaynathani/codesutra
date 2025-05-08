@@ -9,6 +9,7 @@ import RichText from '@/components/RichText'
 
 import { generateMeta } from '@/utilities/generateMeta'
 import ShareButtons from "@/components/ShareButtons/ShareButtons";
+import {getServerSideURL} from "@/utilities/getURL";
 
 export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise })
@@ -39,10 +40,15 @@ type Args = {
 export default async function Post({ params: paramsPromise }: Args) {
     const { isEnabled: draft } = await draftMode()
     const { slug = '' } = await paramsPromise
-    const url = '/blog/' + slug
+    const path = '/blog/' + slug
     const post = await queryPostBySlug({ slug })
 
-    if (!post) return <PayloadRedirects url={url} />
+    if (!post) return <PayloadRedirects url={path} />
+
+    // Generate the full URL on the server side
+    const baseUrl = getServerSideURL()
+    const fullUrl = `${baseUrl}${path}`
+
 
     return (
         <article className="prose prose-quoteless prose-neutral dark:prose-invert">
@@ -51,7 +57,7 @@ export default async function Post({ params: paramsPromise }: Args) {
             {/* Add ShareButtons component */}
             <div className="flex justify-end items-end mt-8">
                 <ShareButtons
-                    path={url}
+                    url={fullUrl}
                     title={post.title || 'Check out this article'}
                 />
             </div>

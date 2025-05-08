@@ -1,8 +1,6 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  console.log("Target ENV::", process.env.VERCEL_TARGET_ENV);
-  console.log("Target ENV::", process.env.VERCEL_URL);
   return process.env.VERCEL_TARGET_ENV === "production"
       ? `https://www.my-custom-domain.com`
       : process.env.VERCEL_URL
