@@ -42,6 +42,7 @@ export default async function About() {
             </section>
         )
     }
+
     const profileImage = content.image as Media;
     return (
         <section className="max-w-4xl mx-auto px-4 py-12">
