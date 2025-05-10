@@ -5,7 +5,7 @@ import {draftMode} from "next/headers";
 import RichText from "@/components/RichText";
 
 export const metadata = {
-  title: "About",
+  title: "CodeSutra",
   description: "What's Code Sutra?",
 };
 

@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes";
 import { FaCircleHalfStroke } from "react-icons/fa6";
+import {Moon, Sun} from "lucide-react";
 
 const storageKey = 'theme-preference';
 
@@ -89,11 +90,11 @@ export const ThemeSwitch: React.FC = () => {
   }
 
   return (
-    /*<button
+/*    <button
       id="theme-toggle"
       aria-label={`${currentTheme} mode`}
       onClick={toggleTheme}
-      className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90"
+      className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90 mr-10"
     >
       <FaCircleHalfStroke
         className={`h-[14px] w-[14px] ${
@@ -101,13 +102,30 @@ export const ThemeSwitch: React.FC = () => {
         }`}
       />
     </button>*/
-      <button id="theme-toggle"
+/*      <button id="theme-toggle"
               className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90 mr-10"
               aria-label={`${currentTheme} mode`}
               onClick={toggleTheme}>
         {currentTheme === 'auto' && (getSystemTheme() === 'dark' ? '🌙' : '☀️')}
         {currentTheme === 'light' && '☀️'}
         {currentTheme === 'dark' && '🌙'}
+      </button>*/
+
+      <button
+          id="theme-toggle"
+          className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90 mr-10"
+          aria-label={`${currentTheme} mode`}
+          onClick={toggleTheme}
+      >
+        {currentTheme === 'auto' && (getSystemTheme() === 'dark'
+                ? <Moon className="h-4 w-4" color="#11a1ac"/>
+                : <Sun className="h-4 w-4" color="#11a1ac"/>
+        )}
+        {currentTheme === 'light' && <Sun className="h-4 w-4"/>}
+        {currentTheme === 'dark' && <Moon className="h-4 w-4"/>}
       </button>
+
+
+
   );
 };

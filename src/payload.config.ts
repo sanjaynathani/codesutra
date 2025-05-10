@@ -11,6 +11,8 @@ import {Posts} from "@/collections/Posts";
 import {Categories} from "@/collections/Categories";
 import { Contents } from '@/collections/Content';
 import {getServerSideURL} from "@/utilities/getURL";
+import Redirects from "../redirects";
+import {redirectsPlugin} from "@payloadcms/plugin-redirects";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,13 +42,16 @@ export default buildConfig({
         url: process.env.MONGODB_URI || '',
     }),
     plugins: [
-    vercelBlobStorage({
-        collections: {
-            media: true,
-        },
-        token: process.env.BLOB_READ_WRITE_TOKEN || '',
-    }),
-],
+        vercelBlobStorage({
+            collections: {
+                media: true,
+            },
+            token: process.env.BLOB_READ_WRITE_TOKEN || '',
+        }),
+        redirectsPlugin({
+            collections: ['posts', 'contents'], // collections to enable redirect to
+        }),
+    ],
     // If you want to resize images, crop, set focal point, etc.
     // make sure to install it and pass it to the config.
     // This is optional - if you don't need to do these things,
