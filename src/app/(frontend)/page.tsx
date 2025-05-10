@@ -4,6 +4,8 @@ import React, {cache} from "react";
 import {draftMode} from "next/headers";
 import RichText from "@/components/RichText";
 
+export const revalidate = 0;
+
 export const metadata = {
   title: "CodeSutra",
   description: "What's Code Sutra?",

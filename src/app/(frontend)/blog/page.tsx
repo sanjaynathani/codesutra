@@ -69,16 +69,16 @@ export default async function BlogPosts() {
                     <h2 className="text-black dark:text-white">
                         {post.title}
                     </h2>
-                    <div className="flex justify-start items-center text-sm">
+                    <div className="flex justify-start items-center text-xs">
                         <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
                             {
                                 post.publishedAt ? formatDate(post.publishedAt, true) : ''
                             }
                         </p>
-                        <p className="mr-4 ml-4">•</p>
+                       {/* <p className="mr-4 ml-4">•</p>
                         <p className="text-neutral-600 dark:text-neutral-400">
                             {post.authorDoc?.name || 'Anonymous'}
-                        </p>
+                        </p>*/}
                     </div>
                 </div>
             </Link>
