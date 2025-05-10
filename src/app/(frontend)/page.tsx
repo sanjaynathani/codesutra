@@ -31,7 +31,7 @@ const queryAbout = cache(async ({ slug }: { slug: string }) => {
 })
 
 export default async function About() {
-  const slug = 'codesutra-'
+  const slug = 'about-codesutra'
   const post = await queryAbout({ slug })
 
   if (!post) {
