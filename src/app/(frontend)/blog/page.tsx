@@ -29,19 +29,19 @@ export default async function BlogPosts() {
         },
     });
 
-    const postsWithAuthors = await Promise.all(
-        posts.docs.map(async (post) => {
-            let authorDoc;
-            if (post.authors?.[0]) {
-                authorDoc = await payload.findByID({
-                    id: typeof post.authors[0] === 'object' ? post.authors[0]?.id : post.authors[0],
-                    collection: 'users',
-                    depth: 0,
-                });
-            }
-            return { ...post, authorDoc };
-        })
-    );
+    // const postsWithAuthors = await Promise.all(
+    //     posts.docs.map(async (post) => {
+    //         let authorDoc;
+    //         if (post.authors?.[0]) {
+    //             authorDoc = await payload.findByID({
+    //                 id: typeof post.authors[0] === 'object' ? post.authors[0]?.id : post.authors[0],
+    //                 collection: 'users',
+    //                 depth: 0,
+    //             });
+    //         }
+    //         return { ...post, authorDoc };
+    //     })
+    // );
 
 
     return (
@@ -50,7 +50,7 @@ export default async function BlogPosts() {
           <h1 className="mb-8 text-2xl font-medium">Blogs</h1>
       </div>
       <div>
-        {postsWithAuthors
+        {posts.docs
             .sort((a, b) => {
                 // Add null checks and provide default dates if needed
                 const dateA = a.publishedAt ? new Date(a.publishedAt) : new Date(0);
@@ -69,16 +69,20 @@ export default async function BlogPosts() {
                     <h2 className="text-black dark:text-white">
                         {post.title}
                     </h2>
-                    <div className="flex justify-start items-center text-xs">
+                    <div className="flex justify-start items-center text-[10px]">
+                        <p className="text-neutral-600 dark:text-neutral-400">
+                            {post?.categories?.length
+                                ? '#' + post.categories.map(cat => typeof cat === 'string' ? cat : cat.title).join(' #')
+                                : '#Uncategorized'
+                            }
+                        </p>
+
+                        <p className="mr-4 ml-4">•</p>
                         <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
                             {
                                 post.publishedAt ? formatDate(post.publishedAt, true) : ''
                             }
                         </p>
-                       {/* <p className="mr-4 ml-4">•</p>
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                            {post.authorDoc?.name || 'Anonymous'}
-                        </p>*/}
                     </div>
                 </div>
             </Link>
