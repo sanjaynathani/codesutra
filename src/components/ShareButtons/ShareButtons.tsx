@@ -16,9 +16,9 @@ interface ShareButtonsProps {
 const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
     return (
         <div className="flex justify-end items-end gap-8">
-            <FacebookShareButton url={url} title={title}>
-                <FacebookIcon size={25} round={true}/>
-            </FacebookShareButton>
+            {/*<FacebookShareButton url={url} title={title}>*/}
+            {/*    <FacebookIcon size={25} round={true}/>*/}
+            {/*</FacebookShareButton>*/}
 
             <TwitterShareButton url={url} title={title}>
                 <XIcon size={25} round={true}/>
@@ -28,9 +28,9 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({ url, title }) => {
                 <LinkedinIcon size={25} round={true}/>
             </LinkedinShareButton>
 
-            <RedditShareButton url={url} title={title}>
-                <RedditIcon size={25} round={true}/>
-            </RedditShareButton>
+            {/*<RedditShareButton url={url} title={title}>*/}
+            {/*    <RedditIcon size={25} round={true}/>*/}
+            {/*</RedditShareButton>*/}
 
             <EmailShareButton url={url} title={title}>
                 <EmailIcon size={25} round={true}/>

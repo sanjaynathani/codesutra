@@ -29,65 +29,49 @@ export default async function BlogPosts() {
         },
     });
 
-    // const postsWithAuthors = await Promise.all(
-    //     posts.docs.map(async (post) => {
-    //         let authorDoc;
-    //         if (post.authors?.[0]) {
-    //             authorDoc = await payload.findByID({
-    //                 id: typeof post.authors[0] === 'object' ? post.authors[0]?.id : post.authors[0],
-    //                 collection: 'users',
-    //                 depth: 0,
-    //             });
-    //         }
-    //         return { ...post, authorDoc };
-    //     })
-    // );
-
-
     return (
-    <section>
-      <div className="flex justify-start items-start">
-          <h1 className="mb-8 text-2xl font-medium">Blogs</h1>
-      </div>
-      <div>
-        {posts.docs
-            .sort((a, b) => {
-                // Add null checks and provide default dates if needed
-                const dateA = a.publishedAt ? new Date(a.publishedAt) : new Date(0);
-                const dateB = b.publishedAt ? new Date(b.publishedAt) : new Date(0);
+        <section>
+            <div className="flex justify-start items-start">
+                <h1 className="mb-8 text-2xl font-medium">Blogs</h1>
+            </div>
+            <div>
+                {posts.docs
+                    .sort((a, b) => {
+                        const dateA = a.publishedAt ? new Date(a.publishedAt) : new Date(0);
+                        const dateB = b.publishedAt ? new Date(b.publishedAt) : new Date(0);
+                        return dateB.getTime() - dateA.getTime();
+                    })
+                    .map((post, index, array) => (
+                        <div key={post.slug}>
+                            <Link
+                                className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
+                                href={`/blog/${post.slug}`}>
+                                <div className="w-full flex flex-col space-y-1">
+                                    <h2 className="text-black dark:text-white">
+                                        {post.title}
+                                    </h2>
+                                    <div className="flex justify-start items-center text-[10px]">
+                                        <p className="text-neutral-600 dark:text-neutral-400">
+                                            {post?.categories?.length
+                                                ? '#' + post.categories.map(cat => typeof cat === 'string' ? cat : cat.title).join(' #')
+                                                : '#Uncategorized'
+                                            }
+                                        </p>
+                                        <p className="mr-4 ml-4">•</p>
+                                        <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
+                                            {post.publishedAt ? formatDate(post.publishedAt, true) : ''}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
+                            {/* Add separator only between posts (not after the last one) and only if there's more than one post */}
+                            {array.length > 1 && index < array.length - 1 && (
+                                <div className="border-t border-neutral-200 dark:border-neutral-800 my-4" />
+                            )}
+                        </div>
+                    ))}
+            </div>
+        </section>
+    );
 
-                return dateB.getTime() - dateA.getTime(); // For descending order (newest first)
-          })
-          .map((post) => (
-
-             /* <Card className="h-full" doc={post} relationTo="posts" showCategories />*/
-            <Link
-              key={post.slug}
-              className="flex flex-col space-y-1 mb-5 transition-opacity duration-200 hover:opacity-80"
-              href={`/blog/${post.slug}`}>
-                <div className="w-full flex flex-col space-y-1">
-                    <h2 className="text-black dark:text-white">
-                        {post.title}
-                    </h2>
-                    <div className="flex justify-start items-center text-[10px]">
-                        <p className="text-neutral-600 dark:text-neutral-400">
-                            {post?.categories?.length
-                                ? '#' + post.categories.map(cat => typeof cat === 'string' ? cat : cat.title).join(' #')
-                                : '#Uncategorized'
-                            }
-                        </p>
-
-                        <p className="mr-4 ml-4">•</p>
-                        <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
-                            {
-                                post.publishedAt ? formatDate(post.publishedAt, true) : ''
-                            }
-                        </p>
-                    </div>
-                </div>
-            </Link>
-          ))}
-      </div>
-    </section>
-  );
 }
