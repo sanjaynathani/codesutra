@@ -54,14 +54,13 @@ export default buildConfig({
         }),
         seoPlugin({
             collections: [
-                'posts',
-                'contents'
+                'posts'
             ],
             uploadsCollection: 'media',
             generateTitle: ({ doc }) => `codesutra.dev — ${doc.title}`,
-            generateDescription: ({ doc }) => doc.excerpt,
+            generateDescription: ({ doc }) => doc.content,
             generateURL: ({ doc, collectionSlug }) =>
-                `https://codesutra.dev/${collectionSlug}/${doc?.slug}`,
+                `https://codesutra.dev/blog/${doc?.slug}`,
         })
     ],
     // If you want to resize images, crop, set focal point, etc.
