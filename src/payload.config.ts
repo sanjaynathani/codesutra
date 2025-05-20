@@ -13,6 +13,7 @@ import { Contents } from '@/collections/Content';
 import {getServerSideURL} from "@/utilities/getURL";
 import Redirects from "../redirects";
 import {redirectsPlugin} from "@payloadcms/plugin-redirects";
+import {seoPlugin} from "@payloadcms/plugin-seo";
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,6 +52,17 @@ export default buildConfig({
         redirectsPlugin({
             collections: ['posts', 'contents'], // collections to enable redirect to
         }),
+        seoPlugin({
+            collections: [
+                'posts',
+                'contents'
+            ],
+            uploadsCollection: 'media',
+            generateTitle: ({ doc }) => `codesutra.dev — ${doc.title}`,
+            generateDescription: ({ doc }) => doc.excerpt,
+            generateURL: ({ doc, collectionSlug }) =>
+                `https://codesutra.dev/${collectionSlug}/${doc?.slug}`,
+        })
     ],
     // If you want to resize images, crop, set focal point, etc.
     // make sure to install it and pass it to the config.

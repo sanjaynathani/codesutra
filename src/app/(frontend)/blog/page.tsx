@@ -57,7 +57,7 @@ export default async function BlogPosts() {
                                                 : '#Uncategorized'
                                             }
                                         </p>
-                                        <p className="mr-4 ml-4">•</p>
+                                        <p className="text-neutral-600 dark:text-neutral-400 tabular-nums mr-2 ml-2">•</p>
                                         <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
                                             {post.publishedAt ? formatDate(post.publishedAt, true) : ''}
                                         </p>
