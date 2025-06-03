@@ -26,6 +26,13 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import {slugField} from "@/fields/slug";
+import {
+  BgColorFeature,
+  HighlightColorFeature,
+  TextColorFeature,
+  VimeoFeature,
+  YoutubeFeature
+} from "payloadcms-lexical-ext";
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -91,11 +98,16 @@ export const Posts: CollectionConfig<'posts'> = {
                 features: ({ rootFeatures }) => {
                   return [
                     ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
+                      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                      BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                      FixedToolbarFeature(),
+                      InlineToolbarFeature(),
+                      HorizontalRuleFeature(),
+                      TextColorFeature(),
+                      BgColorFeature(),
+                      HighlightColorFeature(),
+                      YoutubeFeature(),
+                      VimeoFeature()
                   ]
                 },
               }),
