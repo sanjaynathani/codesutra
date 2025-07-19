@@ -70,7 +70,7 @@ export default async function About() {
                     <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
                         {content.title}
                     </h1>
-                    <article className="prose prose-lg prose-quoteless prose-neutral dark:prose-invert max-w-none">
+                    <article className="prose-lg prose-quoteless prose-neutral dark:prose-invert max-w-none">
                         <RichText
                             data={content.text}
                             enableGutter={false}
