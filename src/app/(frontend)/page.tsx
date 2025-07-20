@@ -49,7 +49,7 @@ export default async function About() {
       <h1 className="mb-8 text-2xl font-medium">
         {post.title}
       </h1>
-      <article className="prose-quoteless prose-neutral dark:prose-invert">
+      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
         <RichText className="max-w-[48rem] mx-auto" data={post.text} enableGutter={false} />
       </article>
       </section>

@@ -51,7 +51,7 @@ export default async function Post({ params: paramsPromise }: Args) {
 
 
     return (
-        <article className="prose-quoteless prose-neutral dark:prose-invert">
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert">
             {/*<PostHero post={post} />*/}
             <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
             {/* Add ShareButtons component */}
