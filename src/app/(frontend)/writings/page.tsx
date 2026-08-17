@@ -48,7 +48,7 @@ export default async function Writings() {
                                 className="group flex flex-col space-y-1 mb-4 p-4 -mx-4 rounded-xl transition-flow hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
                                 href={`/writings/${post.slug}`}>
                                 <div className="w-full flex flex-col space-y-1">
-                                    <h2 className="text-xl text-black dark:text-white font-serif mb-1 group-hover:text-accent-light dark:group-hover:text-accent-dark transition-colors">
+                                    <h2 className="text-xl text-black dark:text-white font-serif mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-600 group-hover:via-emerald-500 group-hover:to-turquoise-500 dark:group-hover:from-teal-400 dark:group-hover:via-emerald-400 dark:group-hover:to-turquoise-400 transition-all duration-300">
                                         {post.title}
                                     </h2>
                                     <div className="flex justify-start items-center text-xs space-x-2">
@@ -56,8 +56,8 @@ export default async function Writings() {
                                             {post.publishedAt ? formatDate(post.publishedAt, true) : ''}
                                         </p>
                                         <p className="text-accent-light dark:text-accent-dark font-medium">
-                                            {post?.tags?.length
-                                                ? '#' + post.tags.map(tag => typeof tag === 'string' ? tag : tag.title).join(' #')
+                                            {post?.tags
+                                                ? '#' + post.tags.split(',').map(tag => tag.trim()).filter(Boolean).join(' #')
                                                 : ''
                                             }
                                         </p>

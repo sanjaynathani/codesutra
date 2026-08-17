@@ -12,9 +12,10 @@ type Props = YouTubeBlockProps & {
 export const YouTubeBlock: React.FC<Props> = ({ className, videoId }) => {
   return (
     <div className={[className, 'not-prose'].filter(Boolean).join(' ')}>
-      <div className="relative w-full aspect-video rounded-lg overflow-hidden my-8">
+      <div className="w-full rounded-2xl overflow-hidden my-8 shadow-xl border border-neutral-200 dark:border-neutral-800 flex">
         <iframe
-          className="absolute top-0 left-0 w-full h-full"
+          className="w-full border-0"
+          style={{ aspectRatio: '16/9' }}
           src={`https://www.youtube.com/embed/${videoId}`}
           title="YouTube video player"
           frameBorder="0"

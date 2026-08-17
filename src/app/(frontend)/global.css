@@ -160,9 +160,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .transition-flow {
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-600 via-emerald-500 to-turquoise-500 dark:from-teal-400 dark:via-emerald-400 dark:to-turquoise-400;
 }
 
 .card-flow {
-  @apply rounded-xl border border-neutral-200 dark:border-neutral-800 transition-flow hover:shadow-lg hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-neutral-900;
+  @apply rounded-xl border border-neutral-200 dark:border-neutral-800 transition-flow bg-white dark:bg-neutral-900 relative overflow-hidden;
+}
+
+.card-flow::before {
+  content: "";
+  @apply absolute inset-0 opacity-0 transition-opacity duration-500 rounded-xl pointer-events-none;
+  background: linear-gradient(to right, rgba(20, 184, 166, 0.05), rgba(16, 185, 129, 0.05), rgba(48, 213, 200, 0.05));
+  z-index: 1;
+}
+
+.card-flow:hover::before {
+  @apply opacity-100;
+}
+
+.card-flow:hover {
+  @apply shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(48,213,200,0.03)] border-neutral-300 dark:border-neutral-700 translate-y-[-2px];
 }

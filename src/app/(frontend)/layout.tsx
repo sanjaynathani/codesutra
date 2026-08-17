@@ -76,7 +76,7 @@ export default function RootLayout({
           title="JSON Feed"
         />
       </head>
-      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-0 lg:mt-0 mb-10 lg:mb-30">
+      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-0 lg:mt-0 mb-10 lg:mb-30 min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-50/70 via-white to-white dark:from-teal-900/20 dark:via-[#0a0a0a] dark:to-[#0a0a0a] text-neutral-900 dark:text-neutral-100">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

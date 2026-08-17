@@ -14,6 +14,10 @@ const config = {
         accent: {
           light: '#0f766e', /* teal-700 */
           dark: '#2dd4bf',  /* teal-400 */
+        },
+        turquoise: {
+          400: '#40E0D0',
+          500: '#30D5C8',
         }
       },
       typography: {

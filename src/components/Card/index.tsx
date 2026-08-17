@@ -8,7 +8,7 @@ import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'tags'>
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -21,7 +21,7 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
+  const { slug, categories, meta, title, tags } = doc || {}
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
@@ -45,7 +45,7 @@ export const Card: React.FC<{
         {showCategories && hasCategories && (
           <div className="uppercase text-sm mb-4">
             {showCategories && hasCategories && (
-              <div>
+              <div className="mb-2">
                 {categories?.map((category, index) => {
                   if (typeof category === 'object') {
                     const { title: titleFromCategory } = category
@@ -66,11 +66,16 @@ export const Card: React.FC<{
                 })}
               </div>
             )}
+            {tags && (
+              <div className="text-accent-light dark:text-accent-dark font-medium text-xs">
+                {'#' + tags.split(',').map(tag => tag.trim()).filter(Boolean).join(' #')}
+              </div>
+            )}
           </div>
         )}
         {titleToUse && (
           <div className="prose">
-            <h3 className="font-serif text-xl group-hover:text-accent-light dark:group-hover:text-accent-dark transition-colors">
+            <h3 className="font-serif text-xl group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-600 group-hover:via-emerald-500 group-hover:to-turquoise-500 dark:group-hover:from-teal-400 dark:group-hover:via-emerald-400 dark:group-hover:to-turquoise-400 transition-all duration-300">
               <Link className="not-prose" href={href} ref={link.ref}>
                 {titleToUse}
               </Link>

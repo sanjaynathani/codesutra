@@ -135,12 +135,11 @@ export const Posts: CollectionConfig<'posts'> = {
             },
             {
               name: 'tags',
-              type: 'relationship',
+              type: 'text',
               admin: {
                 position: 'sidebar',
+                description: 'Comma separated tags (e.g. react, nextjs, typescript)',
               },
-              hasMany: true,
-              relationTo: 'tags',
             },
           ],
           label: 'Meta',
@@ -237,7 +236,7 @@ export const Posts: CollectionConfig<'posts'> = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 800, // Increased from 100ms to reduce typing lag while still keeping live preview snappy
       },
       schedulePublish: true,
     },

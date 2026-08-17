@@ -72,7 +72,6 @@ export interface Config {
     posts: Post;
     contents: Content;
     categories: Category;
-    tags: Tag;
     redirects: Redirect;
     'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
@@ -87,7 +86,6 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     contents: ContentsSelect<false> | ContentsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    tags: TagsSelect<false> | TagsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
@@ -278,7 +276,10 @@ export interface Post {
   };
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
-  tags?: (string | Tag)[] | null;
+  /**
+   * Comma separated tags (e.g. react, nextjs, typescript)
+   */
+  tags?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -306,18 +307,6 @@ export interface Post {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: string;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
- */
-export interface Tag {
   id: string;
   title: string;
   slug?: string | null;
@@ -528,10 +517,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: string | Category;
-      } | null)
-    | ({
-        relationTo: 'tags';
-        value: string | Tag;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -761,17 +746,6 @@ export interface ContentsSelect<T extends boolean = true> {
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  slugLock?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags_select".
- */
-export interface TagsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
