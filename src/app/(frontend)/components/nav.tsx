@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react"; // You already have lucide-react in your dependencies
 
-const navItems = {
+const navItems: Record<string, { name: string }> = {
   // "/portfolio": { name: "Portfolio" },
   // "/work": { name: "Work" },
   // "/writings": { name: "Writings" },
