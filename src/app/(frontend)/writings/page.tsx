@@ -6,11 +6,11 @@ import configPromise from '@payload-config'
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Blog",
+  title: "Writings",
   description: "Writings",
 };
 
-export default async function BlogPosts() {
+export default async function Writings() {
     const payload = await getPayload({ config: configPromise })
     const posts = await payload.find({
         collection: 'posts',
@@ -23,6 +23,7 @@ export default async function BlogPosts() {
             title: true,
             slug: true,
             categories: true,
+            tags: true,
             meta: true,
             publishedAt: true,
             authors: true,
@@ -32,7 +33,7 @@ export default async function BlogPosts() {
     return (
         <section>
             <div className="flex justify-start items-start">
-                <h1 className="mb-8 text-2xl font-medium">Blogs</h1>
+                <h1 className="mb-8 text-2xl font-medium">Writings</h1>
             </div>
             <div>
                 {posts.docs
@@ -44,22 +45,21 @@ export default async function BlogPosts() {
                     .map((post, index, array) => (
                         <div key={post.slug}>
                             <Link
-                                className="flex flex-col space-y-1 mb-4 transition-opacity duration-200 hover:opacity-80"
-                                href={`/blog/${post.slug}`}>
+                                className="group flex flex-col space-y-1 mb-4 p-4 -mx-4 rounded-xl transition-flow hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+                                href={`/writings/${post.slug}`}>
                                 <div className="w-full flex flex-col space-y-1">
-                                    <h2 className="text-black dark:text-white">
+                                    <h2 className="text-xl text-black dark:text-white font-serif mb-1 group-hover:text-accent-light dark:group-hover:text-accent-dark transition-colors">
                                         {post.title}
                                     </h2>
-                                    <div className="flex justify-start items-center text-[10px]">
-                                        <p className="text-neutral-600 dark:text-neutral-400">
-                                            {post?.categories?.length
-                                                ? '#' + post.categories.map(cat => typeof cat === 'string' ? cat : cat.title).join(' #')
-                                                : '#Uncategorized'
-                                            }
-                                        </p>
-                                        <p className="text-neutral-600 dark:text-neutral-400 tabular-nums mr-2 ml-2">•</p>
-                                        <p className="text-neutral-600 dark:text-neutral-400 tabular-nums">
+                                    <div className="flex justify-start items-center text-xs space-x-2">
+                                        <p className="text-neutral-500 dark:text-neutral-400">
                                             {post.publishedAt ? formatDate(post.publishedAt, true) : ''}
+                                        </p>
+                                        <p className="text-accent-light dark:text-accent-dark font-medium">
+                                            {post?.tags?.length
+                                                ? '#' + post.tags.map(tag => typeof tag === 'string' ? tag : tag.title).join(' #')
+                                                : ''
+                                            }
                                         </p>
                                     </div>
                                 </div>

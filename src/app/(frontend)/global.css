@@ -149,3 +149,20 @@ table {
 .title {
   text-wrap: balance;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), serif;
+}
+
+/* Subtle transitions and layout flow */
+.prose {
+  line-height: 1.75;
+}
+
+.transition-flow {
+  transition: all 0.3s ease;
+}
+
+.card-flow {
+  @apply rounded-xl border border-neutral-200 dark:border-neutral-800 transition-flow hover:shadow-lg hover:border-neutral-300 dark:hover:border-neutral-700 bg-white dark:bg-neutral-900;
+}

@@ -6,6 +6,16 @@ const config = {
   content: ["./src/app/**/*.{js,ts,jsx,tsx,mdx}", "./public/**/*.svg"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-inter)"],
+        serif: ["var(--font-playfair)"],
+      },
+      colors: {
+        accent: {
+          light: '#0f766e', /* teal-700 */
+          dark: '#2dd4bf',  /* teal-400 */
+        }
+      },
       typography: {
         quoteless: {
           css: {

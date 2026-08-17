@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react"; // You already have lucide-react in your
 const navItems = {
   "/portfolio": { name: "Portfolio" },
   "/work": { name: "Work" },
-  "/blog": { name: "Blog" },
+  "/writings": { name: "Writings" },
 };
 
 export function Navbar() {

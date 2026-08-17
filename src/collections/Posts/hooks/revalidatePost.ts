@@ -12,7 +12,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
   console.log('Context: ', context);
   if (!context.disableRevalidate) {
     if (doc._status === 'published') {
-      const path = `/blog/${doc.slug}`
+      const path = `/writings/${doc.slug}`
 
       payload.logger.info(`Revalidating post at path: ${path}`)
 
@@ -22,7 +22,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
     // If the post was previously published, we need to revalidate the old path
     if (previousDoc._status === 'published' && doc._status !== 'published') {
-      const oldPath = `/blog/${previousDoc.slug}`
+      const oldPath = `/writings/${previousDoc.slug}`
 
       payload.logger.info(`Revalidating old post at path: ${oldPath}`)
 
@@ -31,8 +31,8 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
     }
 
     if (doc._status === 'published') {
-      const path = `/blog/${doc.slug}`
-      const blogIndexPath = '/blog'
+      const path = `/writings/${doc.slug}`
+      const blogIndexPath = '/writings'
 
       payload.logger.info(`Revalidating post at path: ${path}`)
       revalidatePath(path)
@@ -46,7 +46,7 @@ export const revalidatePost: CollectionAfterChangeHook<Post> = ({
 
 export const revalidateDelete: CollectionAfterDeleteHook<Post> = ({ doc, req: { context } }) => {
   if (!context.disableRevalidate) {
-    const path = `/blog/${doc?.slug}`
+    const path = `/writings/${doc?.slug}`
 
     revalidatePath(path)
     revalidateTag('posts-sitemap')

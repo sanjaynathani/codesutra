@@ -9,6 +9,7 @@ import {vercelBlobStorage} from "@payloadcms/storage-vercel-blob";
 import {Media} from "@/collections/Media";
 import {Posts} from "@/collections/Posts";
 import {Categories} from "@/collections/Categories";
+import {Tags} from "@/collections/Tags";
 import { Contents } from '@/collections/Content';
 import {getServerSideURL} from "@/utilities/getURL";
 import Redirects from "../redirects";
@@ -29,7 +30,7 @@ export default buildConfig({
     editor: lexicalEditor(),
 
     // Define and configure your collections in this array
-    collections: [Users, Media, Posts, Contents, Categories],
+    collections: [Users, Media, Posts, Contents, Categories, Tags],
     cors: [getServerSideURL()].filter(Boolean),
 
     // Your Payload secret - should be a complex and secure string, unguessable
@@ -60,7 +61,7 @@ export default buildConfig({
             generateTitle: ({ doc }) => `codesutra.dev — ${doc.title}`,
             generateDescription: ({ doc }) => doc.content,
             generateURL: ({ doc, collectionSlug }) =>
-                `https://codesutra.dev/blog/${doc?.slug}`,
+                `https://codesutra.dev/writings/${doc?.slug}`,
         })
     ],
     // If you want to resize images, crop, set focal point, etc.
