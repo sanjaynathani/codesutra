@@ -1,7 +1,4 @@
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SERVER_URL ||
-  process.env.VERCEL_URL ||
-  'https://example.com'
+const SITE_URL = 'https://codesutra.dev';
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
