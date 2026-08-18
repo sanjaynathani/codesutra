@@ -51,9 +51,25 @@ export default async function Post({ params: paramsPromise }: Args) {
     const baseUrl = getServerSideURL()
     const fullUrl = `${baseUrl}${path}`
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.meta?.description || post.title,
+        datePublished: post.publishedAt,
+        author: {
+            '@type': 'Person',
+            name: post.populatedAuthors?.[0]?.name || 'Sanjay',
+        },
+        url: fullUrl,
+    };
 
     return (
         <article className="prose prose-quoteless prose-neutral dark:prose-invert pt-6">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="max-w-[48rem] mx-auto mb-10 not-prose">
                 <Link href="/" className="inline-flex items-center text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-emerald-500 transition-colors mb-8 group">
                     <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
