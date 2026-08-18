@@ -6,6 +6,8 @@ import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import RichText from '@/components/RichText'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 import { generateMeta } from '@/utilities/generateMeta'
 import ShareButtons from "@/components/ShareButtons/ShareButtons";
@@ -51,8 +53,31 @@ export default async function Post({ params: paramsPromise }: Args) {
 
 
     return (
-        <article className="prose prose-quoteless prose-neutral dark:prose-invert">
-            {/*<PostHero post={post} />*/}
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert pt-6">
+            <div className="max-w-[48rem] mx-auto mb-10 not-prose">
+                <Link href="/" className="inline-flex items-center text-sm font-medium text-teal-600 dark:text-teal-400 hover:text-emerald-500 transition-colors mb-8 group">
+                    <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+                    Back to Writings
+                </Link>
+                <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6 text-neutral-900 dark:text-neutral-50 leading-tight">
+                    {post.title}
+                </h1>
+                <div className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 space-x-3">
+                    {post.populatedAuthors && post.populatedAuthors.length > 0 && (
+                        <>
+                            <span className="font-medium text-neutral-700 dark:text-neutral-300">
+                                {post.populatedAuthors.map((a: any) => a.name).join(', ')}
+                            </span>
+                            <span>&bull;</span>
+                        </>
+                    )}
+                    {post.publishedAt && (
+                        <time dateTime={post.publishedAt}>
+                            {new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        </time>
+                    )}
+                </div>
+            </div>
             <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
             {/* Add ShareButtons component */}
             <div className="flex justify-end items-end mt-8">

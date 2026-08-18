@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ThemeSwitch } from "./theme-switch";
-import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react"; // You already have lucide-react in your dependencies
 
@@ -19,25 +17,13 @@ export function Navbar() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 dark:bg-[#0a0a0a]/70 backdrop-blur-md border-b border-neutral-200/50 dark:border-neutral-800/50 lg:mb-3 mb-1 py-2">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div className="flex items-center justify-between ml-10">
-            <a href="/">
-              <Image
-                  src="/code-sutra_logo_light.png"
-                  alt="Code Sutra"
-                  className="block dark:hidden"
-                  style={{ transform: 'scale(1.3) scaleX(1.05)', transformOrigin: 'left center' }}
-                  width={140}
-                  height={140}
-                  priority
-              />
-              <Image
-                  src="/code-sutra_logo_dark.png"
-                  alt="Code Sutra"
-                  className="hidden dark:block"
-                  style={{ transform: 'scale(1.3) scaleX(1.05)', transformOrigin: 'left center', filter: 'brightness(1.2)' }}
-                  width={140}
-                  height={140}
-                  priority
-              />
+            <a href="/" className="flex items-center group">
+              <span className="text-3xl font-bold font-serif text-teal-600 dark:text-teal-400 transition-transform duration-300 group-hover:-translate-x-1">&lt;</span>
+              <div className="flex items-baseline tracking-tight px-1">
+                <span className="text-3xl font-bold font-serif bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-emerald-500 dark:from-teal-400 dark:to-emerald-300">Code</span>
+                <span className="text-3xl font-bold font-serif text-neutral-800 dark:text-neutral-100">Sutra</span>
+              </div>
+              <span className="text-3xl font-bold font-serif text-teal-600 dark:text-teal-400 transition-transform duration-300 group-hover:translate-x-1">/&gt;</span>
             </a>
             {/* Hamburger Menu Button */}
             <button
@@ -73,7 +59,6 @@ export function Navbar() {
                 );
               })}
             </div>
-            <ThemeSwitch />
           </div>
         </div>
       </nav>

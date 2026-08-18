@@ -196,7 +196,7 @@ export const Contents: CollectionConfig<'contents'> = {
   versions: {
     drafts: {
       autosave: {
-        interval: 100, // We set this interval for optimal live preview
+        interval: 800, // Increased from 100ms to reduce typing lag
       },
       schedulePublish: true,
     },

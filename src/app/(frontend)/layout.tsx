@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} font-sans`}>
+    <html lang="en" className={`dark ${inter.variable} ${playfair.variable} font-sans`} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"
@@ -76,14 +76,14 @@ export default function RootLayout({
           title="JSON Feed"
         />
       </head>
-      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-0 lg:mt-0 mb-10 lg:mb-30 min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-50/70 via-white to-white dark:from-teal-900/20 dark:via-[#0a0a0a] dark:to-[#0a0a0a] text-neutral-900 dark:text-neutral-100">
+      <body className="antialiased flex flex-col items-center justify-center mx-auto mt-0 lg:mt-0 mb-10 lg:mb-30 min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-50/70 via-white to-white dark:from-teal-900/40 dark:via-[#09090b] dark:to-[#09090b] text-neutral-900 dark:text-neutral-100">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
           disableTransitionOnChange
         >
-          <main className="flex-auto min-w-0 mt-0 md:mt-0 flex flex-col px-6 sm:px-4 md:px-0 max-w-[800px] w-full pt-[100px]">
+          <main className="relative z-10 flex-auto min-w-0 mt-0 md:mt-0 flex flex-col px-6 sm:px-4 md:px-0 max-w-6xl w-full pt-[100px]">
             <Navbar />
             {children}
             <Footer />
